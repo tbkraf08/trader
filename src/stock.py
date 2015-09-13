@@ -34,7 +34,9 @@ YAHOO_ADJ_CLOSE_FIELD = 'Adj_Close'
 
 ONE_MINUTE = 1
 ONE_DAY = 1440
+ONE_YEAR = 365
 
+DATE_FORMAT = "%Y-%m-%d"
 
 def str2date(date):
 	try:
@@ -51,7 +53,7 @@ def str2date(date):
 		logger.error('Error parsing date: %s', date)
 		raise Exception("Issue parsing date: %s", date)
 
-def date2str(date, _format="%Y-%m-%d"):
+def date2str(date, _format=DATE_FORMAT):
 	if isinstance(date, datetime.datetime):
 		return date.strftime(_format)
 	elif isinstance(date, str) or isinstance(date, unicode):
@@ -146,12 +148,15 @@ class Stock:
 	def _get_fetch_range(self, start, end):
 		if not end:
 			end = datetime.datetime.now()
+		else:
+			end = str2date(end)
+
 		if not start:
-			start = end - datetime.timedelta(days=365)
+			start = end - datetime.timedelta(days=ONE_YEAR)
 		
-		start, end = str2date(start), str2date(end)
-		start = start.strftime("%Y-%m-%d")
-		end = end.strftime("%Y-%m-%d")
+		start = str2date(start)
+		start = start.strftime(DATE_FORMAT)
+		end = end.strftime(DATE_FORMAT)
 		return start, end
 
 	def _gen_file_name(self, start, end, postfix='txt'):
