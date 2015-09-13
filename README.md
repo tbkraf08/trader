@@ -5,14 +5,14 @@ Trying to build a trading bot. Currently working on the strategy aspect of the p
 
 # Install Notes
 
-- provides realtime quote (no delay)
+_provides realtime quote (no delay)_
 sudo pip install googlefinance
 
-- provides historical quote data (15 min delay)
+_provides historical quote data (15 min delay)_
 pip install yahoo-finance
 
-- parse datetime
+_parse datetime_
 sudo pip install python-dateutil
 
-- backtrader getting started http://backtrader.readthedocs.org/en/latest/quickstart.html
+_backtrader getting started http://backtrader.readthedocs.org/en/latest/quickstart.html_
 pip install backtrader[matplotlib]
